@@ -6,9 +6,12 @@ import java.util.Map;
 public class WinningLotto {
 
     private final Map<LottoNumber, LottoType> status;
+    private final LottoNumber bonusNumber;
 
-    public WinningLotto(Lotto lotto) {
+    public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        this.bonusNumber = bonusNumber;
         this.status = new HashMap<>();
+
         for (int i = 1; i <= 45; i++) {
             status.put(LottoNumber.from(i), LottoType.NONE);
         }
@@ -29,5 +32,9 @@ public class WinningLotto {
         }
 
         return count;
+    }
+
+    public boolean matchBonus(Lotto lotto) {
+        return lotto.getNumbers().contains(bonusNumber);
     }
 }
