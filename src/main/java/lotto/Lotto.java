@@ -2,17 +2,29 @@ package lotto;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private final Set<Integer> numbers;
+    private final Set<LottoNumber> numbers;
 
-    public Lotto(Collection<Integer> numbers) {
-        Set<Integer> distinctNumbers = Set.copyOf(numbers);
-        validate(numbers, distinctNumbers);
+    public Lotto(Collection<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> distinctNumbers = Set.copyOf(lottoNumbers);
+        validate(lottoNumbers, distinctNumbers);
         this.numbers = distinctNumbers;
     }
 
-    private void validate(Collection<Integer> numbers, Set<Integer> distinct) {
+    public Set<LottoNumber> getNumbers() {
+        return Set.copyOf(numbers);
+    }
+
+    public static Lotto of(Collection<Integer> numbers) {
+        Set<LottoNumber> lottoNumbers = numbers.stream()
+                .map(LottoNumber::from)
+                .collect(Collectors.toUnmodifiableSet());
+        return new Lotto(lottoNumbers);
+    }
+
+    private void validate(Collection<LottoNumber> numbers, Set<LottoNumber> distinct) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_SIZE.getMessage());
         }
@@ -21,6 +33,4 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorCode.DUPLICATE_LOTTO_NUMBER.getMessage());
         }
     }
-
-    // TODO: 추가 기능 구현
 }
