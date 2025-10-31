@@ -2,32 +2,18 @@ package lotto;
 
 import static lotto.ErrorCode.LOTTO_NUMBER_OUT_OF_RANGE;
 
-import java.util.Objects;
-
-public class LottoNumber {
+public record LottoNumber(Integer number) implements Comparable<LottoNumber> {
 
     private static final Integer MINIMUM_NUMBER = 1;
     private static final Integer MAXIMUM_NUMBER = 45;
 
-    private final Integer number;
-
-    public LottoNumber(Integer number) {
+    public LottoNumber {
         validate(number);
-        this.number = number;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        LottoNumber that = (LottoNumber) o;
-        return Objects.equals(number, that.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(number);
+    public int compareTo(LottoNumber other) {
+        return this.number.compareTo(other.number);
     }
 
     private void validate(Integer number) {
