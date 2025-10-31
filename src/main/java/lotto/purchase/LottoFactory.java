@@ -31,4 +31,11 @@ public class LottoFactory {
                 new LottoNumber(bonusNumber)
         );
     }
+
+    public WinningLotto createWinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
+        return new WinningLotto(
+                Lotto.of(winningNumbers),
+                new LottoNumber(bonusNumber)
+        );
+    }
 }
