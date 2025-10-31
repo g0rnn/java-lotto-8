@@ -32,10 +32,10 @@ public class LottoFactory {
         );
     }
 
-    public static WinningLotto createWinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
+    public static WinningLotto createWinningLotto(Lotto winningLotto, LottoNumber bonusNumber) {
         return new WinningLotto(
-                Lotto.of(winningNumbers),
-                new LottoNumber(bonusNumber)
+                winningLotto,
+                bonusNumber
         );
     }
 }

@@ -2,10 +2,10 @@ package lotto.purchase;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -29,9 +29,9 @@ public class Lotto {
     }
 
     public static Lotto of(Collection<Integer> numbers) {
-        Set<LottoNumber> lottoNumbers = numbers.stream()
+        List<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
-                .collect(Collectors.toSet());
+                .toList();
         return new Lotto(lottoNumbers);
     }
 
