@@ -1,6 +1,9 @@
 package lotto;
 
+import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import lotto.purchase.Lotto;
 import lotto.purchase.LottoFactory;
 import lotto.purchase.Money;
@@ -10,24 +13,53 @@ import lotto.statistics.LottoReport;
 
 public class Application {
     public static void main(String[] args) {
-        LottoFactory lottoFactory = new LottoFactory();
+        Money money = retryOnException(() -> {
+            String input = input("구입금액을 입력해 주세요.");
+            long amount = Long.parseLong(input);
+            return new Money(amount);
+        });
 
-        // 입력: 구입 금액
+        List<Lotto> lottos = LottoFactory.createLottos(money);
 
-        int amount = 1000;
-        Money money = new Money(amount);
-        List<Lotto> lottos = lottoFactory.createLottos(money);
+        // TODO: 출력: 로또 현황
 
-        // 출력: 로또 현황
+        List<Integer> winningNumbers = retryOnException(() -> {
+            String input = input("당첨 번호를 입력해 주세요.");
+            return parseNumbers(input);
+        });
 
-        // 입력: 당첨 번호 입력
-        // 입력: 보너스 번호 입력
-        List<Integer> winningNumbers = List.of();
-        Integer bonus = 0;
-        WinningLotto winningLotto = lottoFactory.createWinningLotto(winningNumbers, bonus);
+        Integer bonus = retryOnException(() -> {
+            String input = input("보너스 번호를 입력해 주세요.");
+            return Integer.parseInt(input);
+        });
+
+        WinningLotto winningLotto = LottoFactory.createWinningLotto(winningNumbers, bonus);
+
         Aggregator aggregator = new Aggregator(winningLotto);
         LottoReport report = aggregator.aggregate(lottos, money);
 
-        // 출력: 통계 출력
+        // TODO: 출력: 통계 출력
+    }
+
+    private static <T> T retryOnException(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static List<Integer> parseNumbers(String input) {
+        return Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Integer::parseInt)
+                .toList();
+    }
+
+    private static String input(String message) {
+        System.out.println(message);
+        return Console.readLine();
     }
 }
