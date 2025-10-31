@@ -21,24 +21,27 @@ public class Application {
 
         List<Lotto> lottos = LottoFactory.createLottos(money);
 
-        // TODO: 출력: 로또 현황
+        int size = lottos.size();
+        System.out.println("\n" + size + "개를 구매했습니다.");
+        lottos.forEach(System.out::println);
 
         List<Integer> winningNumbers = retryOnException(() -> {
-            String input = input("당첨 번호를 입력해 주세요.");
+            String input = input("\n당첨 번호를 입력해 주세요.");
             return parseNumbers(input);
         });
 
-        Integer bonus = retryOnException(() -> {
-            String input = input("보너스 번호를 입력해 주세요.");
-            return Integer.parseInt(input);
+        WinningLotto winningLotto = retryOnException(() -> {
+            String input = input("\n보너스 번호를 입력해 주세요.");
+            Integer bonus = Integer.parseInt(input);
+            return LottoFactory.createWinningLotto(winningNumbers, bonus);
         });
-
-        WinningLotto winningLotto = LottoFactory.createWinningLotto(winningNumbers, bonus);
 
         Aggregator aggregator = new Aggregator(winningLotto);
         LottoReport report = aggregator.aggregate(lottos, money);
 
-        // TODO: 출력: 통계 출력
+        System.out.println("\n당첨 통계");
+        System.out.println("---");
+        System.out.println(report.toString());
     }
 
     private static <T> T retryOnException(Supplier<T> supplier) {
