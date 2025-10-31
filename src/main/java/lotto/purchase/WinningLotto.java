@@ -1,5 +1,7 @@
 package lotto.purchase;
 
+import static lotto.purchase.PurchaseErrorCode.DUPLICATE_LOTTO_NUMBER;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +11,7 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(Lotto lotto, LottoNumber bonusNumber) {
+        validate(lotto, bonusNumber);
         this.bonusNumber = bonusNumber;
         this.status = new HashMap<>();
 
@@ -36,5 +39,11 @@ public class WinningLotto {
 
     public boolean matchBonus(Lotto lotto) {
         return lotto.getNumbers().contains(bonusNumber);
+    }
+
+    private void validate(Lotto lotto, LottoNumber bonusNumber) {
+        if (lotto.getNumbers().contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBER.getMessage());
+        }
     }
 }

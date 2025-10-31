@@ -1,5 +1,6 @@
 package lotto.purchase;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,5 +35,16 @@ class WinningLottoTest {
         boolean matched = winningLotto.matchBonus(lotto);
 
         assertTrue(matched);
+    }
+
+    @Test
+    void 당첨_번호와_보너스_번호는_중복되지_않는다() {
+        //given
+        Lotto lotto = Lotto.of(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonus = new LottoNumber(1);
+
+        assertThatThrownBy(() -> new WinningLotto(lotto, bonus))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith("[ERROR]");
     }
 }
