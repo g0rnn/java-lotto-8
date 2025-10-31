@@ -1,6 +1,6 @@
-package lotto;
+package lotto.purchase;
 
-public enum ErrorCode {
+public enum PurchaseErrorCode {
 
     INVALID_LOTTO_SIZE("로또 번호는 6개여야 합니다."),
     DUPLICATE_LOTTO_NUMBER("로또 번호는 중복될 수 없습니다."),
@@ -12,7 +12,7 @@ public enum ErrorCode {
     private static final String PREFIX = "[ERROR] ";
     private final String message;
 
-    ErrorCode(String message) {
+    PurchaseErrorCode(String message) {
         this.message = message;
     }
 

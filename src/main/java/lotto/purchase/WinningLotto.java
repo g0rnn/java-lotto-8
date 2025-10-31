@@ -1,4 +1,4 @@
-package lotto;
+package lotto.purchase;
 
 import java.util.HashMap;
 import java.util.Map;

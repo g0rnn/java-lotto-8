@@ -1,7 +1,7 @@
-package lotto;
+package lotto.purchase;
 
-import static lotto.ErrorCode.INVALID_MONEY_UNIT;
-import static lotto.ErrorCode.NEGATIVE_AMOUNT_NOT_ALLOWED;
+import static lotto.purchase.PurchaseErrorCode.INVALID_MONEY_UNIT;
+import static lotto.purchase.PurchaseErrorCode.NEGATIVE_AMOUNT_NOT_ALLOWED;
 
 public record Money(long amount) {
 

@@ -1,6 +1,6 @@
-package lotto;
+package lotto.purchase;
 
-import static lotto.ErrorCode.LOTTO_NUMBER_OUT_OF_RANGE;
+import static lotto.purchase.PurchaseErrorCode.LOTTO_NUMBER_OUT_OF_RANGE;
 
 public record LottoNumber(Integer number) implements Comparable<LottoNumber> {
 

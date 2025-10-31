@@ -1,8 +1,7 @@
-package lotto;
+package lotto.purchase;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

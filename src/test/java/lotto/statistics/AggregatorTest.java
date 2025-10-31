@@ -1,10 +1,13 @@
-package lotto;
+package lotto.statistics;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import lotto.purchase.Lotto;
+import lotto.purchase.LottoFactory;
+import lotto.purchase.Money;
+import lotto.purchase.WinningLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

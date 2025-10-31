@@ -1,6 +1,9 @@
-package lotto;
+package lotto.statistics;
 
 import java.util.List;
+import lotto.purchase.Lotto;
+import lotto.purchase.Money;
+import lotto.purchase.WinningLotto;
 
 public class Aggregator {
 

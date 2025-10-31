@@ -1,8 +1,9 @@
-package lotto;
+package lotto.statistics;
 
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import lotto.purchase.Money;
 
 public class LottoResult {
 

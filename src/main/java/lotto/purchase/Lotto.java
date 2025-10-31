@@ -1,4 +1,4 @@
-package lotto;
+package lotto.purchase;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,11 +32,11 @@ public class Lotto {
 
     private void validate(Collection<LottoNumber> numbers, Set<LottoNumber> distinct) {
         if (numbers.size() != LOTTO_NUMBERS_SIZE) {
-            throw new IllegalArgumentException(ErrorCode.INVALID_LOTTO_SIZE.getMessage());
+            throw new IllegalArgumentException(PurchaseErrorCode.INVALID_LOTTO_SIZE.getMessage());
         }
 
         if (numbers.size() != distinct.size()) {
-            throw new IllegalArgumentException(ErrorCode.DUPLICATE_LOTTO_NUMBER.getMessage());
+            throw new IllegalArgumentException(PurchaseErrorCode.DUPLICATE_LOTTO_NUMBER.getMessage());
         }
     }
 }
