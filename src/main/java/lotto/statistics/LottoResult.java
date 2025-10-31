@@ -11,11 +11,17 @@ public class LottoResult {
 
     public LottoResult() {
         for (Grade grade : Grade.values()) {
+            if (grade == Grade.NONE) {
+                continue;
+            }
             results.put(grade, 0);
         }
     }
 
     public void add(Grade grade) {
+        if (grade == Grade.NONE) {
+            return;
+        }
         results.put(grade, results.get(grade) + 1);
     }
 
@@ -30,5 +36,16 @@ public class LottoResult {
         }
 
         return new Money(total);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        results.forEach((grade, matched) ->
+                builder.append(grade.toString())
+                        .append(" - ")
+                        .append(matched)
+                        .append("개\n"));
+        return builder.toString();
     }
 }

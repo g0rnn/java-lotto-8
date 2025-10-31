@@ -16,6 +16,11 @@ public record LottoNumber(Integer number) implements Comparable<LottoNumber> {
         return this.number.compareTo(other.number);
     }
 
+    @Override
+    public String toString() {
+        return number.toString();
+    }
+
     private void validate(Integer number) {
         if (MINIMUM_NUMBER > number || MAXIMUM_NUMBER < number) {
             throw new IllegalArgumentException(LOTTO_NUMBER_OUT_OF_RANGE.getMessage());

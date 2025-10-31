@@ -23,6 +23,11 @@ public class Lotto {
         return Set.copyOf(numbers);
     }
 
+    @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
     public static Lotto of(Collection<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
                 .map(LottoNumber::new)
