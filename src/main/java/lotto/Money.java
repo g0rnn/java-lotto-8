@@ -17,4 +17,10 @@ public record Money(long amount) {
             throw new IllegalArgumentException(INVALID_MONEY_UNIT.getMessage());
         }
     }
+
+    public String divide(Money other) {
+        double result = (double) amount / other.amount;
+        double rounded = Math.round(result * 10) / 10.0;
+        return String.valueOf(rounded);
+    }
 }

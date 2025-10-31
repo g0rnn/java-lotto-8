@@ -19,4 +19,8 @@ public enum ErrorCode {
     public String getMessage() {
         return PREFIX + message;
     }
+
+    public String format(Object... args) {
+        return String.format(message, args);
+    }
 }

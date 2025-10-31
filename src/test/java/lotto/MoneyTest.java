@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 class MoneyTest {
 
     @Test
-    void 돈이_자연수가_아니라면_예외가_발생한다() {
-        assertThatThrownBy(() -> new Money(0))
+    void 돈이_음수라면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Money(-1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageStartingWith("[ERROR]");
     }
