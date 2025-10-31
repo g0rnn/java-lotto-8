@@ -31,6 +31,17 @@ public class ConsoleView {
         return Integer.parseInt(input);
     }
 
+    public void printReport(String report) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---");
+        System.out.println(report);
+    }
+
+    public void printLottos(int size, String lottos) {
+        System.out.println("\n" + size + "개를 구매했습니다.");
+        System.out.println(lottos);
+    }
+
     private String input(String message) {
         System.out.println(message);
         return Console.readLine();

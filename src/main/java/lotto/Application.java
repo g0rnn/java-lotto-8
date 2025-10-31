@@ -23,8 +23,8 @@ public class Application {
         List<Lotto> lottos = LottoFactory.createLottos(money);
 
         int size = lottos.size();
-        System.out.println("\n" + size + "개를 구매했습니다.");
-        lottos.forEach(System.out::println);
+        String publishedLotto = getPublishedLotto(lottos);
+        consoleView.printLottos(size, publishedLotto);
 
         Lotto winning = retryOnException(() -> {
             List<Integer> numbers = consoleView.readWinningNumbers();
@@ -39,10 +39,16 @@ public class Application {
 
         Aggregator aggregator = new Aggregator(winningLotto);
         LottoReport report = aggregator.aggregate(lottos, money);
+        consoleView.printReport(report.toString());
+    }
 
-        System.out.println("\n당첨 통계");
-        System.out.println("---");
-        System.out.println(report.toString());
+    private static String getPublishedLotto(List<Lotto> lottos) {
+        StringBuilder builder = new StringBuilder();
+        for (Lotto lotto : lottos) {
+            builder.append(lotto.toString());
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 
     private static <T> T retryOnException(Supplier<T> supplier) {
