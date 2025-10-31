@@ -1,11 +1,11 @@
 package lotto;
 
-import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+import lotto.console.ConsoleView;
 import lotto.purchase.Lotto;
 import lotto.purchase.LottoFactory;
+import lotto.purchase.LottoNumber;
 import lotto.purchase.Money;
 import lotto.purchase.WinningLotto;
 import lotto.statistics.Aggregator;
@@ -13,9 +13,10 @@ import lotto.statistics.LottoReport;
 
 public class Application {
     public static void main(String[] args) {
+        ConsoleView consoleView = new ConsoleView();
+
         Money money = retryOnException(() -> {
-            String input = input("구입금액을 입력해 주세요.");
-            long amount = Long.parseLong(input);
+            long amount = consoleView.readAmount();
             return new Money(amount);
         });
 
@@ -25,15 +26,15 @@ public class Application {
         System.out.println("\n" + size + "개를 구매했습니다.");
         lottos.forEach(System.out::println);
 
-        List<Integer> winningNumbers = retryOnException(() -> {
-            String input = input("\n당첨 번호를 입력해 주세요.");
-            return parseNumbers(input);
+        Lotto winning = retryOnException(() -> {
+            List<Integer> numbers = consoleView.readWinningNumbers();
+            return Lotto.of(numbers);
         });
 
         WinningLotto winningLotto = retryOnException(() -> {
-            String input = input("\n보너스 번호를 입력해 주세요.");
-            Integer bonus = Integer.parseInt(input);
-            return LottoFactory.createWinningLotto(winningNumbers, bonus);
+            Integer bonus = consoleView.readBonusNumber();
+            LottoNumber bonusNumber = new LottoNumber(bonus);
+            return LottoFactory.createWinningLotto(winning, bonusNumber);
         });
 
         Aggregator aggregator = new Aggregator(winningLotto);
@@ -48,21 +49,11 @@ public class Application {
         while (true) {
             try {
                 return supplier.get();
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] " + e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    private static List<Integer> parseNumbers(String input) {
-        return Arrays.stream(input.split(","))
-                .map(String::trim)
-                .map(Integer::parseInt)
-                .toList();
-    }
-
-    private static String input(String message) {
-        System.out.println(message);
-        return Console.readLine();
     }
 }

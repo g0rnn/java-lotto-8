@@ -47,3 +47,8 @@
 - [ ] 사용자가 잘못된 값을 입력할 경우 IllegalArgumentException을 발생시키고, "[ERROR]"로 시작하는 에러 메시지를 출력 후 그 부분부터 입력을 다시 받는다.
     - Exception이 아닌 IllegalArgumentException, IllegalStateException 등과 같은 명확한 유형을 처리한다.
 - [ ] 구매 금액이 1,000원 단위가 아닌 경우
+
+#### 입력 예외 상황
+- [x] 당첨 번호가 쉼표(,)로 구분되어 있지 않은 경우
+- [x] 구매 금액이 숫자가 아닌 경우
+- [x] 구매 금액이 -2^63 ~ 2^63 -1가 아닌 경우
