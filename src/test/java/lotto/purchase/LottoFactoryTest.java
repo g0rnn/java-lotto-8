@@ -8,19 +8,12 @@ import org.junit.jupiter.api.Test;
 
 class LottoFactoryTest {
 
-    static LottoFactory lottoFactory;
-
-    @BeforeAll
-    static void setup() {
-        lottoFactory = new LottoFactory();
-    }
-
     @Test
     void 입금_금액에_맞게_로또를_발급한다() {
         int amount = 1000;
         Money money = new Money(amount);
 
-        List<Lotto> lottos = lottoFactory.createLottos(money);
+        List<Lotto> lottos = LottoFactory.createLottos(money);
         int expected = amount / Money.UNIT;
 
         assertThat(lottos).hasSize(expected);
@@ -28,7 +21,7 @@ class LottoFactoryTest {
 
     @Test
     void 당첨_로또를_발급한다() {
-        assertThat(lottoFactory.createWinningLotto())
+        assertThat(LottoFactory.createWinningLotto())
                 .isInstanceOf(WinningLotto.class);
     }
 }

@@ -6,10 +6,10 @@ import java.util.List;
 
 public class LottoFactory {
 
-    public LottoFactory() {
+    private LottoFactory() {
     }
 
-    public List<Lotto> createLottos(Money money) {
+    public static List<Lotto> createLottos(Money money) {
         long amount = money.amount();
         long count = amount / Money.UNIT;
 
@@ -21,7 +21,7 @@ public class LottoFactory {
         return results;
     }
 
-    public WinningLotto createWinningLotto() {
+    public static WinningLotto createWinningLotto() {
         List<Integer> randomUniqueNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 7);
         List<Integer> lottoNumbers = randomUniqueNumbers.subList(0, 6);
         Integer bonusNumber = randomUniqueNumbers.get(6);
@@ -32,7 +32,7 @@ public class LottoFactory {
         );
     }
 
-    public WinningLotto createWinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
+    public static WinningLotto createWinningLotto(List<Integer> winningNumbers, Integer bonusNumber) {
         return new WinningLotto(
                 Lotto.of(winningNumbers),
                 new LottoNumber(bonusNumber)

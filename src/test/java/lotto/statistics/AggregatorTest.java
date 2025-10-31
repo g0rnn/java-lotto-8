@@ -13,14 +13,13 @@ import org.junit.jupiter.api.Test;
 
 class AggregatorTest {
 
-    private final LottoFactory lottoFactory = new LottoFactory();
     private Aggregator aggregator;
 
     @BeforeEach
     void setup() {
         List<Integer> actualWinningNumbers = List.of(1, 2, 3, 4, 5, 6, 7);
         assertRandomUniqueNumbersInRangeTest(() -> {
-            WinningLotto winningLotto = lottoFactory.createWinningLotto();
+            WinningLotto winningLotto = LottoFactory.createWinningLotto();
             this.aggregator = new Aggregator(winningLotto);
         }, actualWinningNumbers);
     }
@@ -32,7 +31,7 @@ class AggregatorTest {
         List<Integer> actualLottoNumbers = List.of(11, 12, 13, 4, 5, 6);
 
         assertRandomUniqueNumbersInRangeTest(() -> {
-            List<Lotto> lottos = lottoFactory.createLottos(money);
+            List<Lotto> lottos = LottoFactory.createLottos(money);
             LottoReport report = aggregator.aggregate(lottos, money);
 
             assertThat(report.rateOfReturn()).matches("[0-9]+\\.[0-9]");
