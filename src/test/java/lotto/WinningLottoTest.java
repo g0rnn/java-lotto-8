@@ -14,7 +14,7 @@ class WinningLottoTest {
 
     @BeforeEach
     void setup() {
-        this.bonusNumber = LottoNumber.from(7);
+        this.bonusNumber = new LottoNumber(7);
         this.winningLotto = new WinningLotto(Lotto.of(List.of(1, 2, 3, 4, 5, 6)), bonusNumber);
     }
 

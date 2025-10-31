@@ -12,7 +12,7 @@ class LottoNumberTest {
     @ParameterizedTest
     @ValueSource(ints = {-1, 0, 46})
     void 로또_번호는_정해진_범위를_넘어서면_예외가_발생한다(int invalidNumber) {
-        assertThatThrownBy(() -> LottoNumber.from(invalidNumber))
+        assertThatThrownBy(() -> new LottoNumber(invalidNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageStartingWith("[ERROR]");
     }

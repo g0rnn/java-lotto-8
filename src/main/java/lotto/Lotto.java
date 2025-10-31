@@ -19,7 +19,7 @@ public class Lotto {
 
     public static Lotto of(Collection<Integer> numbers) {
         Set<LottoNumber> lottoNumbers = numbers.stream()
-                .map(LottoNumber::from)
+                .map(LottoNumber::new)
                 .collect(Collectors.toUnmodifiableSet());
         return new Lotto(lottoNumbers);
     }

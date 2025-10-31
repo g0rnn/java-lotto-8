@@ -13,7 +13,7 @@ public class WinningLotto {
         this.status = new HashMap<>();
 
         for (int i = 1; i <= 45; i++) {
-            status.put(LottoNumber.from(i), LottoType.NONE);
+            status.put(new LottoNumber(i), LottoType.NONE);
         }
 
         for (LottoNumber lottoNumber : lotto.getNumbers()) {

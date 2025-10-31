@@ -11,13 +11,9 @@ public class LottoNumber {
 
     private final Integer number;
 
-    private LottoNumber(Integer number) {
+    public LottoNumber(Integer number) {
         validate(number);
         this.number = number;
-    }
-
-    public static LottoNumber from(Integer number) {
-        return new LottoNumber(number);
     }
 
     @Override

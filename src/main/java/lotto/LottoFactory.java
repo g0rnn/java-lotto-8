@@ -6,6 +6,9 @@ import java.util.List;
 
 public class LottoFactory {
 
+    public LottoFactory() {
+    }
+
     public List<Lotto> createLottos(Money money) {
         int amount = money.amount();
         int count = amount / Money.UNIT;
@@ -16,5 +19,16 @@ public class LottoFactory {
             results.add(Lotto.of(randomUniqueNumbers));
         }
         return results;
+    }
+
+    public WinningLotto createWinningLotto() {
+        List<Integer> randomUniqueNumbers = Randoms.pickUniqueNumbersInRange(1, 45, 7);
+        List<Integer> lottoNumbers = randomUniqueNumbers.subList(0, 6);
+        Integer bonusNumber = randomUniqueNumbers.get(6);
+
+        return new WinningLotto(
+                Lotto.of(lottoNumbers),
+                new LottoNumber(bonusNumber)
+        );
     }
 }
