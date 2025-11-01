@@ -19,8 +19,8 @@ public class Lotto {
         this.numbers = Collections.unmodifiableSortedSet(distinctNumbers);
     }
 
-    public Set<LottoNumber> getNumbers() {
-        return Set.copyOf(numbers);
+    public List<LottoNumber> getNumbers() {
+        return List.copyOf(numbers);
     }
 
     @Override
