@@ -73,11 +73,7 @@ public class LottoController {
     }
 
     private String getPublishedLotto(List<Lotto> lottos) {
-        StringBuilder builder = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            builder.append(lotto.toString());
-            builder.append("\n");
-        }
-        return builder.toString();
+        String[] results = lottos.stream().map(Lotto::toString).toArray(String[]::new);
+        return String.join("\n", results);
     }
 }
