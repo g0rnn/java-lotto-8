@@ -24,7 +24,7 @@ public class Aggregator {
         }
 
         Money profit = lottoResult.calculateTotalProfit();
-        String rateOfReturn = profit.divide(amount);
+        String rateOfReturn = profit.rateBasedOn(amount);
 
         return new LottoReport(lottoResult, rateOfReturn);
     }

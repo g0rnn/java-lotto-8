@@ -18,8 +18,8 @@ public record Money(long amount) {
         }
     }
 
-    public String divide(Money other) {
-        double result = (double) amount / other.amount;
+    public String rateBasedOn(Money seed) {
+        double result = (double) amount / seed.amount * 100.0;
         double rounded = Math.round(result * 10) / 10.0;
         return String.valueOf(rounded);
     }
