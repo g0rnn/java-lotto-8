@@ -1,5 +1,7 @@
 package lotto.purchase;
 
+import static lotto.purchase.PurchaseErrorCode.EXCEED_PURCHASE_LIMIT;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class LottoFactory {
     public static List<Lotto> createLottos(Money money) {
         long amount = money.amount();
         long count = amount / Money.UNIT;
+        validateCount(count);
 
         List<Lotto> results = new ArrayList<>();
         for (long i = 0; i < count; i++) {
@@ -37,5 +40,11 @@ public class LottoFactory {
                 winningLotto,
                 bonusNumber
         );
+    }
+
+    private static void validateCount(long count) {
+        if (count > 10_000) {
+            throw new IllegalArgumentException(EXCEED_PURCHASE_LIMIT.getMessage());
+        }
     }
 }

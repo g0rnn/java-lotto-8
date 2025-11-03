@@ -6,6 +6,7 @@ import lotto.console.ConsoleView;
 import lotto.purchase.Lotto;
 import lotto.purchase.LottoFactory;
 import lotto.purchase.LottoNumber;
+import lotto.purchase.LottoReceipt;
 import lotto.purchase.Money;
 import lotto.purchase.WinningLotto;
 import lotto.statistics.Aggregator;
@@ -20,22 +21,24 @@ public class LottoController {
     }
 
     public void run() {
-        Money money = getMoney();
-        List<Lotto> lottos = LottoFactory.createLottos(money);
-        printPublishedLotto(lottos);
+        LottoReceipt receipt = purchaseLotto();
+        printPublishedLotto(receipt.issuedLotto());
 
-        WinningLotto winningLotto = getWinningLotto();
-        printStatistics(winningLotto, lottos, money);
+        WinningLotto winningLotto = raffleWinningLotto();
+        printStatistics(winningLotto, receipt.issuedLotto(), receipt.price());
     }
 
-    private Money getMoney() {
+    private LottoReceipt purchaseLotto() {
         return retryOnException(() -> {
             long amount = consoleView.readAmount();
-            return new Money(amount);
+            Money price = new Money(amount);
+            List<Lotto> lottos = LottoFactory.createLottos(price);
+
+            return new LottoReceipt(price, lottos);
         });
     }
 
-    private WinningLotto getWinningLotto() {
+    private WinningLotto raffleWinningLotto() {
         Lotto winning = retryOnException(() -> {
             List<Integer> numbers = consoleView.readWinningNumbers();
             return Lotto.of(numbers);
