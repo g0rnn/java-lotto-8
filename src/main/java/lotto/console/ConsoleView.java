@@ -42,6 +42,10 @@ public class ConsoleView {
         System.out.println(lottos);
     }
 
+    public static void release() {
+        Console.close();
+    }
+
     private String input(String message) {
         System.out.println(message);
         return Console.readLine();
